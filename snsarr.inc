@@ -114,24 +114,20 @@ PROCEDURE init_arrays(num) {
 }
 
 VERBATIM
-static void hshake(SynS*, PreL*, int);
+static void hshake(SynS*, PreL*, int, double*, double*);
 ENDVERBATIM
 
-: 2 arguments - index, presyn link
+: 3 arguments - presyn link, presyn nsyn, presyn maxsyn
 PROCEDURE setlink() {
 VERBATIM { 
-  int ii, x, new_v;
+  int ii, new_v;
   SynS *sns;
-  double ptemp;
   PreL *ppsyn;
-    
-  if (ifarg(2)) { 
-    x = (int)*getarg(1);
-    ptemp = *getarg(2);		/* pick up pointer */
-  } else {
-    x = nsyn;
-    ptemp = *getarg(1);
-  }
+
+  int x = nsyn;
+  double ptemp = *getarg(1); /* link */
+  double* const p_nsyn = getarg(2); /* nsyn in presyn */
+  double* const p_maxsyn = getarg(3); /* maxsyn in presyn */
 
   if (x >= maxsyn) {
     init_arrays(maxsyn+POSTINC); /* #DEFINE POSTINC 5 */
@@ -157,7 +153,7 @@ VERBATIM {
     new_v = 0;
   }
 
-  hshake(sns,ppsyn,new_v);
+  hshake(sns, ppsyn, new_v, p_nsyn, p_maxsyn);
 
   x *= (int)CHAINLEN;
   for (ii=x;ii < x + CHAINLEN;ii++) {
@@ -182,14 +178,8 @@ ENDVERBATIM
 VERBATIM
 /* ls will be a pointer to presyn cell's array of pointers */
 /* flag == 1 if this is a brand new entry */
-static void hshake(SynS *ss, PreL *pl, int flag) {
+static void hshake(SynS *ss, PreL *pl, int flag, double* nn, double* mx) {
   int ii;
-  double *nn;
-  double *mx;
-
-  nn = pl->nnpre; /* pointer to presyn npre */
-  mx = pl->mxpre; /* pointer to presyn maxpre */
-
   /* erase presyn pointer if this has been set before */
   if (flag == 0) {		/* an old entry */
     /* fall out of loop if a pointer exists already */

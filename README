@@ -37,3 +37,5 @@ Changelog
          block in kca.mod to a form compatible with cnexp
 20220520 Updated MOD files to contain valid C++ and be compatible with the
          upcoming versions 8.2 and 9.0 of NEURON.
+20230420 Avoid storing pointers to RANGE variables for compatibility with the
+         upcoming version 9.0 of NEURON.
