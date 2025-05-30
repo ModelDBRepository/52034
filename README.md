@@ -36,11 +36,15 @@ making the code available.
 Changelog
 ---------
 
-20110407 updated solve methods to cnexp, derivimplicit from euler
+20110407 updated solve methods to cnexp, derivimplicit from euler  
+
 20150219 implements Michael Hine's suggestion to update the DERIVATIVE
-         block in kca.mod to a form compatible with cnexp
+         block in kca.mod to a form compatible with cnexp  
+
 20220520 Updated MOD files to contain valid C++ and be compatible with the
-         upcoming versions 8.2 and 9.0 of NEURON.
+         upcoming versions 8.2 and 9.0 of NEURON.  
+
 20230420 Avoid storing pointers to RANGE variables for compatibility with the
-         upcoming version 9.0 of NEURON.
-2025-05-27 – Standardized to Markdown
+         upcoming version 9.0 of NEURON.  
+
+20250527 Standardized to Markdown
